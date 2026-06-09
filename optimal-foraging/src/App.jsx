@@ -15,7 +15,6 @@ function SpeakerNotes({ notes, current, total, title, onPrev, onNext }) {
       maxWidth: 640,
       margin: "0 auto",
     }}>
-      {/* Header */}
       <div style={{ marginBottom: 20, paddingBottom: 14, borderBottom: "1px solid rgba(74,222,128,0.2)" }}>
         <p style={{ color: "rgba(74,222,128,0.6)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: 6 }}>
           Speaker Notes
@@ -25,7 +24,6 @@ function SpeakerNotes({ notes, current, total, title, onPrev, onNext }) {
         </h2>
       </div>
 
-      {/* Notes */}
       <div style={{ flex: 1 }}>
         {notes.map((note, i) => (
           <div key={i} style={{
@@ -40,7 +38,6 @@ function SpeakerNotes({ notes, current, total, title, onPrev, onNext }) {
         ))}
       </div>
 
-      {/* Mobile nav */}
       <div style={{
         display: "flex",
         justifyContent: "space-between",
@@ -50,38 +47,22 @@ function SpeakerNotes({ notes, current, total, title, onPrev, onNext }) {
         borderTop: "1px solid rgba(240,244,240,0.06)",
         gap: 12,
       }}>
-        <button
-          onClick={onPrev}
-          disabled={current === 0}
+        <button onClick={onPrev} disabled={current === 0}
           style={{
-            flex: 1,
-            padding: "14px 0",
-            borderRadius: 10,
-            fontSize: 16,
-            cursor: "pointer",
-            border: "1px solid rgba(240,244,240,0.15)",
-            color: "rgba(240,244,240,0.5)",
-            background: "transparent",
-            opacity: current === 0 ? 0.3 : 1,
+            flex: 1, padding: "14px 0", borderRadius: 10, fontSize: 16, cursor: "pointer",
+            border: "1px solid rgba(240,244,240,0.15)", color: "rgba(240,244,240,0.5)",
+            background: "transparent", opacity: current === 0 ? 0.3 : 1,
           }}>
           ← Prev
         </button>
         <span style={{ color: "rgba(240,244,240,0.25)", fontSize: 14, whiteSpace: "nowrap" }}>
           {current + 1} / {total}
         </span>
-        <button
-          onClick={onNext}
-          disabled={current === total - 1}
+        <button onClick={onNext} disabled={current === total - 1}
           style={{
-            flex: 1,
-            padding: "14px 0",
-            borderRadius: 10,
-            fontSize: 16,
-            cursor: "pointer",
-            border: "1px solid rgba(74,222,128,0.4)",
-            color: "#4ade80",
-            background: "rgba(74,222,128,0.06)",
-            opacity: current === total - 1 ? 0.3 : 1,
+            flex: 1, padding: "14px 0", borderRadius: 10, fontSize: 16, cursor: "pointer",
+            border: "1px solid rgba(74,222,128,0.4)", color: "#4ade80",
+            background: "rgba(74,222,128,0.06)", opacity: current === total - 1 ? 0.3 : 1,
           }}>
           Next →
         </button>
@@ -102,7 +83,6 @@ export default function App() {
   const chapter = chapters[current];
   const isNotes = new URLSearchParams(window.location.search).has("notes");
 
-  // Keyboard navigation
   useEffect(() => {
     const handler = (e) => {
       if (e.key === "ArrowRight" || e.key === "ArrowDown") go(1);
@@ -119,24 +99,27 @@ export default function App() {
     setCurrent(next);
   };
 
-if (isNotes) {
-  return (
-    <SpeakerNotes
-      notes={chapter.notes}
-      current={current}
-      total={total}
-      title={chapter.title}
-      onPrev={() => go(-1)}
-      onNext={() => go(1)}
-    />
-  );
-}
+  if (isNotes) {
+    return (
+      <SpeakerNotes
+        notes={chapter.notes}
+        current={current}
+        total={total}
+        title={chapter.title}
+        onPrev={() => go(-1)}
+        onNext={() => go(1)}
+      />
+    );
+  }
 
   return (
     <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: "#0a1a0f", overflow: "hidden" }}>
 
       {/* Top bar */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 40px", borderBottom: "1px solid rgba(240,244,240,0.06)", flexShrink: 0 }}>
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "10px 40px", borderBottom: "1px solid rgba(240,244,240,0.06)", flexShrink: 0,
+      }}>
         <span style={{ color: "rgba(74,222,128,0.5)", fontSize: 12, letterSpacing: "0.3em", textTransform: "uppercase", fontWeight: 500 }}>
           AP Calculus AB
         </span>
@@ -169,24 +152,29 @@ if (isNotes) {
             style={{ height: "100%", display: "flex", flexDirection: "column" }}
           >
             {/* Chapter header */}
-            <div style={{ padding: "20px 40px 0", flexShrink: 0 }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 4 }}>
+            <div style={{ padding: "10px 40px 0", flexShrink: 0 }}>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 2 }}>
                 <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 15, color: "rgba(74,222,128,0.45)", letterSpacing: "0.1em" }}>
                   {chapter.number}
                 </span>
-                <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 52, color: "#f0f4f0", lineHeight: 1 }}>
+                <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 44, color: "#f0f4f0", lineHeight: 1 }}>
                   {chapter.title}
                 </h1>
               </div>
-              <p style={{ color: "rgba(240,244,240,0.4)", fontSize: 20, fontStyle: "italic" }}>
+              <p style={{ color: "rgba(240,244,240,0.4)", fontSize: 17, fontStyle: "italic" }}>
                 {chapter.subtitle}
               </p>
             </div>
 
             {/* Two columns */}
             <div style={{
-              flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr",
-              gap: 24, padding: "14px 32px", overflow: "auto", minHeight: 0,
+              flex: 1,
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 16,
+              padding: "10px 24px",
+              overflow: "auto",
+              minHeight: 0,
             }}>
               <div style={{ overflow: "auto" }}>{chapter.left}</div>
               <div style={{ overflow: "auto" }}>{chapter.right}</div>
@@ -196,17 +184,29 @@ if (isNotes) {
       </div>
 
       {/* Bottom nav */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 40px", borderTop: "1px solid rgba(240,244,240,0.06)", flexShrink: 0 }}>
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "10px 40px", borderTop: "1px solid rgba(240,244,240,0.06)", flexShrink: 0,
+      }}>
         <button onClick={() => go(-1)} disabled={current === 0}
-          style={{ padding: "9px 24px", borderRadius: 8, fontSize: 14, cursor: "pointer", border: "1px solid rgba(240,244,240,0.15)", color: "rgba(240,244,240,0.5)", background: "transparent", opacity: current === 0 ? 0.3 : 1 }}>
+          style={{
+            padding: "8px 22px", borderRadius: 8, fontSize: 14, cursor: "pointer",
+            border: "1px solid rgba(240,244,240,0.15)", color: "rgba(240,244,240,0.5)",
+            background: "transparent", opacity: current === 0 ? 0.3 : 1,
+          }}>
           ← Prev
         </button>
         <p style={{ color: "rgba(240,244,240,0.2)", fontSize: 12, fontStyle: "italic" }}>{chapter.subtitle}</p>
         <button onClick={() => go(1)} disabled={current === total - 1}
-          style={{ padding: "9px 24px", borderRadius: 8, fontSize: 14, cursor: "pointer", border: "1px solid rgba(74,222,128,0.4)", color: "#4ade80", background: "rgba(74,222,128,0.06)", opacity: current === total - 1 ? 0.3 : 1 }}>
+          style={{
+            padding: "8px 22px", borderRadius: 8, fontSize: 14, cursor: "pointer",
+            border: "1px solid rgba(74,222,128,0.4)", color: "#4ade80",
+            background: "rgba(74,222,128,0.06)", opacity: current === total - 1 ? 0.3 : 1,
+          }}>
           Next →
         </button>
       </div>
+
     </div>
   );
 }

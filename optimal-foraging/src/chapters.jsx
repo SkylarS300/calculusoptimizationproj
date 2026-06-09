@@ -533,7 +533,8 @@ export function findOptimalTime(T, a, b) {
     if (r > bestR) { bestR = r; bestT = t; }
   }
   return { tStar: bestT, rStar: bestR };
-}`}</pre>
+}`}
+</pre>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 12 }}>
             <StatCard label="Your t*" value={tStar.toFixed(1)} unit="s" highlight sub="from the model" />
             <StatCard label="Max Rate" value={rStar.toFixed(3)} unit="E/s" highlight sub="R(t*)" />
@@ -541,6 +542,158 @@ export function findOptimalTime(T, a, b) {
         </div>
       ),
     },
+
+// 07
+{
+  number: "07",
+  title: "Thank You",
+  subtitle: "A bee, some calculus, and one very useful idea",
+  notes: [
+    "This is your closing slide. You have already said your closing line on the previous slide so just let this one sit.",
+    "If there are questions, answer them here. Leave the slide up the whole time.",
+    "If someone asks how you built the interactive part, say: it is a React app deployed on Vercel, the math runs live in the browser on every slider change.",
+    "If Ms. Leyson asks about the derivation, walk her through the quotient rule steps from chapter 04. You know them.",
+    "If nobody has questions, just say thank you and sit down. You are done.",
+  ],
+left: (
+  <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", height: "100%", gap: 14 }}>
+
+    {/* Big result */}
+    <div style={{
+      background: "rgba(10,26,15,0.8)",
+      border: "1px solid rgba(74,222,128,0.25)",
+      borderRadius: 14,
+      padding: "16px 24px",
+      textAlign: "center",
+    }}>
+      <p style={{ color: "rgba(240,244,240,0.4)", fontSize: 12, textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 8 }}>
+        The result
+      </p>
+      <span style={{ fontFamily: "'DM Serif Display', serif", fontSize: 38, color: "#4ade80", fontStyle: "italic" }}>
+        G′(t*) = R(t*)
+      </span>
+      <p style={{ color: "rgba(240,244,240,0.45)", fontSize: 15, marginTop: 8, lineHeight: 1.5 }}>
+        Leave when your marginal gain equals your average rate.
+      </p>
+    </div>
+
+    {/* Big picture */}
+    <div style={{ ...box, padding: "14px 18px" }}>
+      <p style={{ color: "#a78bfa", fontSize: 15, fontWeight: 600, marginBottom: 10 }}>The same move, everywhere</p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {[
+          ["🤖", "Machine learning", "Minimise a loss function. Take derivative. Set to zero."],
+          ["📈", "Economics", "Maximise profit. Take derivative. Set to zero."],
+          ["✈️", "Engineering", "Minimise fuel use. Take derivative. Set to zero."],
+          ["🐝", "A bee in a flower patch", "Maximise foraging rate. Take derivative. Set to zero."],
+        ].map(([emoji, title, desc]) => (
+          <div key={title} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+            <span style={{ fontSize: 18, lineHeight: 1.4, flexShrink: 0 }}>{emoji}</span>
+            <div>
+              <p style={{ color: "#f0f4f0", fontSize: 15, fontWeight: 500, lineHeight: 1.3 }}>{title}</p>
+              <p style={{ color: "rgba(240,244,240,0.4)", fontSize: 13, lineHeight: 1.4 }}>{desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <p style={{ color: "rgba(240,244,240,0.2)", fontSize: 13, textAlign: "center", fontStyle: "italic" }}>
+      Presented to Ms. Leyson · AP Calculus AB · 2026
+    </p>
+  </div>
+),
+  right: (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", gap: 16 }}>
+
+      {/* Bee taking a bow */}
+      <svg viewBox="0 0 400 340" width="90%" style={{ display: "block" }}>
+
+        {/* Spotlight */}
+        <defs>
+          <radialGradient id="bowSpot" cx="50%" cy="0%" r="100%">
+            <stop offset="0%" stopColor="rgba(251,191,36,0.15)" />
+            <stop offset="100%" stopColor="rgba(251,191,36,0)" />
+          </radialGradient>
+        </defs>
+        <polygon points="200,0 140,300 260,300" fill="url(#bowSpot)" />
+
+        {/* Stage */}
+        <rect x={60} y={280} width={280} height={12} rx={4} fill="#1a3a20" />
+        <ellipse cx={200} cy={282} rx={100} ry={7} fill="rgba(74,222,128,0.06)" />
+
+        {/* Bee bowing — body tilted forward */}
+        <g transform="translate(200, 200) rotate(30)">
+          {/* Body */}
+          <ellipse cx={0} cy={0} rx={38} ry={24} fill="#fbbf24" />
+          <rect x={-14} y={-24} width={12} height={48} fill="#1a1a00" opacity={0.4} rx={3} />
+          <rect x={2}  y={-24} width={10} height={48} fill="#1a1a00" opacity={0.3} rx={3} />
+          {/* Wings folded down while bowing */}
+          <ellipse cx={-10} cy={-18} rx={22} ry={10} fill="rgba(200,240,255,0.4)" transform="rotate(20)" />
+          <ellipse cx={14}  cy={-18} rx={22} ry={10} fill="rgba(200,240,255,0.4)" transform="rotate(-20)" />
+          {/* Head */}
+          <circle cx={36} cy={0} r={18} fill="#fbbf24" />
+          <circle cx={41} cy={-4} r={4.5} fill="#1a1a00" />
+          <circle cx={42} cy={-5} r={1.8} fill="white" />
+          {/* Big smile */}
+          <path d="M32,5 Q38,13 46,7" stroke="#1a1a00" strokeWidth={2.5} fill="none" strokeLinecap="round" />
+          {/* Antennae drooping forward with bow */}
+          <line x1={34} y1={-16} x2={44} y2={-30} stroke="#d97706" strokeWidth={2.5} strokeLinecap="round" />
+          <circle cx={44} cy={-32} r={4} fill="#d97706" />
+          <line x1={40} y1={-14} x2={52} y2={-26} stroke="#d97706" strokeWidth={2.5} strokeLinecap="round" />
+          <circle cx={53} cy={-28} r={4} fill="#d97706" />
+          {/* Stinger */}
+          <polygon points="-38,0 -50,5 -50,-5" fill="#d97706" />
+        </g>
+
+        {/* Applause particles */}
+        {[
+          [60, 120], [90, 90], [310, 110], [340, 130],
+          [70, 160], [330, 150], [100, 60], [300, 70],
+        ].map(([x, y], i) => (
+          <text key={i} x={x} y={y} fontSize={i % 2 === 0 ? 16 : 13}
+            fill={i % 3 === 0 ? "#fbbf24" : "rgba(74,222,128,0.7)"}
+            opacity={0.7} fontFamily="Inter">
+            {["✦", "·", "✦", "·", "✦", "·", "✦", "·"][i]}
+          </text>
+        ))}
+
+        {/* Speech bubble */}
+        <rect x={40} y={60} width={160} height={70} rx={12} fill="#1a3a20" stroke="rgba(74,222,128,0.35)" strokeWidth={1.5} />
+        <polygon points="130,130 148,148 140,145" fill="#1a3a20" stroke="rgba(74,222,128,0.35)" strokeWidth={1.5} />
+        <text x={120} y={85} textAnchor="middle" fill="#4ade80" fontSize={13} fontFamily="Inter" fontWeight={600}>thank you.</text>
+        <text x={120} y={104} textAnchor="middle" fill="rgba(240,244,240,0.7)" fontSize={11} fontFamily="Inter">any questions</text>
+        <text x={120} y={120} textAnchor="middle" fill="rgba(240,244,240,0.7)" fontSize={11} fontFamily="Inter">about flowers?</text>
+
+        {/* Audience clapping */}
+        {[60, 100, 140, 180, 220, 260, 300, 340].map((x, i) => (
+          <g key={i}>
+            <circle cx={x} cy={315} r={10} fill="#1a3a20" stroke="rgba(74,222,128,0.2)" strokeWidth={1} />
+            <circle cx={x} cy={303} r={7} fill="#1a3a20" stroke="rgba(74,222,128,0.15)" strokeWidth={1} />
+            <circle cx={x - 2} cy={302} r={1.2} fill="rgba(240,244,240,0.4)" />
+            <circle cx={x + 2} cy={302} r={1.2} fill="rgba(240,244,240,0.4)" />
+            {/* Everyone's hands up clapping */}
+            <line x1={x - 4} y1={294} x2={x - 8} y2={282} stroke="rgba(240,244,240,0.25)" strokeWidth={1.5} strokeLinecap="round" />
+            <line x1={x + 4} y1={294} x2={x + 8} y2={282} stroke="rgba(240,244,240,0.25)" strokeWidth={1.5} strokeLinecap="round" />
+          </g>
+        ))}
+      </svg>
+
+      {/* BEExTED tag to mirror title slide */}
+      <div style={{
+        display: "flex", alignItems: "center", gap: 10,
+        background: "rgba(220,40,40,0.12)",
+        border: "1px solid rgba(220,40,40,0.25)",
+        borderRadius: 8,
+        padding: "8px 20px",
+      }}>
+        <span style={{ color: "rgba(220,60,60,0.9)", fontWeight: 900, fontSize: 20, letterSpacing: "0.08em" }}>BEE</span>
+        <span style={{ color: "rgba(240,244,240,0.3)", fontSize: 14, fontStyle: "italic" }}>Ideas Worth Pollinating</span>
+      </div>
+
+    </div>
+  ),
+},
 
   ];
 
