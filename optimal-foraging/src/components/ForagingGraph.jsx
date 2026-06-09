@@ -15,19 +15,24 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-export default function ForagingGraph({ data, tStar, rStar, showDerivative, showRate = true, showGain = true }) {
+export default function ForagingGraph({ data, tStar, showDerivative, showRate = true, showGain = true }) {
   return (
     <div style={{ width: "100%", height: 260 }}>
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ top: 8, right: 16, left: -10, bottom: 16 }}>
+        <LineChart data={data} margin={{ top: 40, right: 32, left: -10, bottom: 16 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(26,58,32,0.8)" />
-          <XAxis dataKey="t" stroke="rgba(240,244,240,0.25)" tick={{ fill: "rgba(240,244,240,0.4)", fontSize: 10 }}
-            label={{ value: "Patch Time (s)", position: "insideBottom", offset: -8, fill: "rgba(240,244,240,0.35)", fontSize: 11 }} />
+          <XAxis
+            dataKey="t"
+            stroke="rgba(240,244,240,0.25)"
+            tick={{ fill: "rgba(240,244,240,0.4)", fontSize: 10 }}
+            label={{ value: "Patch Time (s)", position: "insideBottom", offset: -8, fill: "rgba(240,244,240,0.35)", fontSize: 11 }}
+          />
           <YAxis stroke="rgba(240,244,240,0.25)" tick={{ fill: "rgba(240,244,240,0.4)", fontSize: 10 }} />
           <Tooltip content={<CustomTooltip />} />
-          <Legend wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
-            formatter={v => <span style={{ color: "rgba(240,244,240,0.5)" }}>{v}</span>} />
-
+          <Legend
+            wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
+            formatter={v => <span style={{ color: "rgba(240,244,240,0.5)" }}>{v}</span>}
+          />
           {showGain && (
             <Line type="monotone" dataKey="gain" name="Energy Gained G(t)"
               stroke="#fbbf24" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
@@ -41,8 +46,19 @@ export default function ForagingGraph({ data, tStar, rStar, showDerivative, show
               stroke="#a78bfa" strokeWidth={1.5} strokeDasharray="5 3" dot={false} />
           )}
           {tStar && (
-            <ReferenceLine x={parseFloat(tStar.toFixed(1))} stroke="#4ade80" strokeDasharray="4 2"
-              label={{ value: `t* = ${tStar.toFixed(1)}s`, fill: "#4ade80", fontSize: 10, position: "top" }} />
+            <ReferenceLine
+              x={parseFloat(tStar.toFixed(1))}
+              stroke="#4ade80"
+              strokeDasharray="4 2"
+              strokeWidth={1.5}
+              label={{
+                value: `🐝 t* = ${tStar.toFixed(1)}s`,
+                fill: "#4ade80",
+                fontSize: 11,
+                position: "insideTopLeft",
+                offset: 8,
+              }}
+            />
           )}
         </LineChart>
       </ResponsiveContainer>
